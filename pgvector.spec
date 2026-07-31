@@ -1,5 +1,5 @@
 Name:		pgvector
-Version:	0.8.1
+Version:	0.8.6
 Release:	1
 Source0:	https://github.com/pgvector/pgvector/archive/refs/tags/v%{version}.tar.gz
 Summary:	Vector similarity search extension for PostgreSQL
