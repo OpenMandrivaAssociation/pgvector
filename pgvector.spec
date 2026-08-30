@@ -1,6 +1,10 @@
+# Match postgresql modules: no LTO, allow unresolved server symbols
+%define _disable_lto 1
+%global _disable_ld_no_undefined 1
+
 Name:		pgvector
 Version:	0.8.6
-Release:	1
+Release:	2
 Source0:	https://github.com/pgvector/pgvector/archive/refs/tags/v%{version}.tar.gz
 Summary:	Vector similarity search extension for PostgreSQL
 URL:		https://github.com/pgvector/pgvector
@@ -34,6 +38,7 @@ Development files for the PostgreSQL vector similarity search extension
 
 %files
 %{_libdir}/postgresql/vector.so
+%{_libdir}/postgresql/bitcode/vector*
 %{_datadir}/postgresql/extension/vector*.sql
 %{_datadir}/postgresql/extension/vector.control
 
