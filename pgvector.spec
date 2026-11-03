@@ -3,8 +3,8 @@
 %global _disable_ld_no_undefined 1
 
 Name:		pgvector
-Version:	0.8.6
-Release:	2
+Version:	0.8.7
+Release:	1
 Source0:	https://github.com/pgvector/pgvector/archive/refs/tags/v%{version}.tar.gz
 Summary:	Vector similarity search extension for PostgreSQL
 URL:		https://github.com/pgvector/pgvector
