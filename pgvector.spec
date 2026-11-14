@@ -1,10 +1,10 @@
-# Match postgresql modules: no LTO, allow unresolved server symbols
-%define _disable_lto 1
-%global _disable_ld_no_undefined 1
+%define pg_ver %(if rpm -q postgresql-devel &>/dev/null; then rpm -q --qf '%%{version}' postgresql-devel; else echo -n 19.0; fi)
+%define pg_major %(echo %{pg_ver} |cut -d. -f1)
+%define pg_next_major %(echo $((%{pg_major}+1)))
 
 Name:		pgvector
 Version:	0.8.7
-Release:	1
+Release:	2
 Source0:	https://github.com/pgvector/pgvector/archive/refs/tags/v%{version}.tar.gz
 Summary:	Vector similarity search extension for PostgreSQL
 URL:		https://github.com/pgvector/pgvector
@@ -12,7 +12,10 @@ License:	MIT
 Group:		Servers
 BuildRequires:	make
 BuildRequires:	pkgconfig(libpq)
-Requires:	postgresql-server
+# While libpq API usually remains stable across major releases,
+# the plugin ABI often doesn't -- let's make sure we rebuild
+# when we update PostgreSQL.
+Requires:	(postgresql-server >= %{pg_major} with postgresql-server < %{pg_next_major})
 
 %description
 Vector similarity search extension for PostgreSQL
